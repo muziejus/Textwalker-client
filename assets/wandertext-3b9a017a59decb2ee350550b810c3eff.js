@@ -30,7 +30,7 @@ var r=n
 e.default=r}),define("wandertext/src/services/data",["exports","@babel/runtime/helpers/esm/asyncToGenerator","@babel/runtime/helpers/esm/classCallCheck","@babel/runtime/helpers/esm/createClass","@babel/runtime/helpers/esm/possibleConstructorReturn","@babel/runtime/helpers/esm/getPrototypeOf","@babel/runtime/helpers/esm/inherits","pouchdb","pouchdb-find","wandertext/config/environment"],function(e,t,n,r,a,o,i,l,s,u){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var d=function(e){function d(){var e,t;(0,n.default)(this,d)
 for(var r=arguments.length,i=new Array(r),l=0;l<r;l++)i[l]=arguments[l]
-return(t=(0,a.default)(this,(e=(0,o.default)(d)).call.apply(e,[this].concat(i)))).db=t.initDB(),t}return(0,i.default)(d,e),(0,r.default)(d,[{key:"initDB",value:function(){return l.default.plugin(s.default),new l.default(u.default.couchdb)}},{key:"getAll",value:function(){var e=(0,t.default)(regeneratorRuntime.mark(function e(){var t
+return(t=(0,a.default)(this,(e=(0,o.default)(d)).call.apply(e,[this].concat(i)))).db=t._initDB(),t}return(0,i.default)(d,e),(0,r.default)(d,[{key:"getAll",value:function(){var e=(0,t.default)(regeneratorRuntime.mark(function e(){var t
 return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.db.allDocs({include_docs:!0})
 case 2:return t=e.sent,e.abrupt("return",t.rows.map(function(e){return e.doc}))
 case 4:case"end":return e.stop()}},e,this)}))
@@ -48,7 +48,7 @@ return function(t){return e.apply(this,arguments)}}()},{key:"getTextBySlug",valu
 return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,this.db.createIndex({index:{fields:["type","slug"],name:"text-by-slug",ddoc:"text-by-slug"}}).then(function(){return r.db.find({selector:{type:"text",slug:t}})}).then(function(e){if(e.docs.length>0)return e.docs[0]}).catch(function(e){return e})
 case 2:return n=e.sent,e.abrupt("return",n)
 case 4:case"end":return e.stop()}},e,this)}))
-return function(t){return e.apply(this,arguments)}}()}]),d}(Ember.Service)
+return function(t){return e.apply(this,arguments)}}()},{key:"_initDB",value:function(){return l.default.plugin(s.default),new l.default(u.default.couchdb)}}]),d}(Ember.Service)
 e.default=d}),define("wandertext/src/services/the-map",["exports","@babel/runtime/helpers/esm/asyncToGenerator","@babel/runtime/helpers/esm/classCallCheck","@babel/runtime/helpers/esm/createClass","@babel/runtime/helpers/esm/possibleConstructorReturn","@babel/runtime/helpers/esm/getPrototypeOf","@babel/runtime/helpers/esm/inherits","leaflet"],function(e,t,n,r,a,o,i,l){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var s=function(e){function s(){var e,t;(0,n.default)(this,s)
 for(var r=arguments.length,i=new Array(r),l=0;l<r;l++)i[l]=arguments[l]
@@ -105,4 +105,4 @@ var i=function(e){function i(){return(0,t.default)(this,i),(0,r.default)(this,(0
 e.default=i}),define("wandertext/src/ui/routes/text/template",["exports"],function(e){Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var t=Ember.HTMLBars.template({id:"MpJIHzc9",block:'{"symbols":[],"statements":[[5,"text-detail",[],[["@slug"],[[22,0,["model","slug"]]]]],[0,"\\n"]],"hasEval":false}',meta:{moduleName:"src/ui/routes/text/template.hbs"}})
 e.default=t}),define("wandertext/templates/components/ember-popper-targeting-parent",["exports","ember-popper/templates/components/ember-popper-targeting-parent"],function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})}),define("wandertext/templates/components/ember-popper",["exports","ember-popper/templates/components/ember-popper"],function(e,t){Object.defineProperty(e,"__esModule",{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return t.default}})}),define("wandertext/config/environment",[],function(){try{var e="wandertext/config/environment",t=document.querySelector('meta[name="'+e+'"]').getAttribute("content"),n={default:JSON.parse(decodeURIComponent(t))}
-return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(r){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("wandertext/src/main").default.create({name:"wandertext",version:"0.0.0+8e00b7a2"})
+return Object.defineProperty(n,"__esModule",{value:!0}),n}catch(r){throw new Error('Could not read config from meta tag with name "'+e+'".')}}),runningTests||require("wandertext/src/main").default.create({name:"wandertext",version:"0.0.0+56b3fc6d"})
