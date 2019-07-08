@@ -1,0 +1,12 @@
+<div class="entry-grid-table h-64 flex-grow text-sm">
+  {{log this.table}}
+
+  {{#light-table this.table as |t|}}
+    {{t.head}}
+
+    {{t.body}}
+      
+    {{t.foot}}
+
+  {{/light-table}}
+</div>
