@@ -54,7 +54,6 @@ export default class EntryGridTableComponent extends Component {
     //   this.page = this.page + 1;
     //   this.fetchRecords();
     // }
-    console.log("bong scrolled to bottom");
   }
 
   constructor(...args) {
