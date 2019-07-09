@@ -1,10 +1,25 @@
-<div class="entry-grid-table h-64 flex-grow text-sm">
-  {{log this.table}}
+<div class="entry-grid flex-grow text-sm">
+  {{#light-table this.table 
+    as |t|}}
+    {{t.head }}
 
-  {{#light-table this.table as |t|}}
-    {{t.head}}
-
-    {{t.body}}
+    {{#t.body
+      canSelect=false
+      onScrolledToBottom=(action this.onScrolledToBottom)
+      rowComponent=(component "table-row" EntryValidations=this.EntryValidations)
+      as |body|
+    }}
+    {{#if this.isLoading}}
+        {{#body.loader}}
+          <div class="h-full flex justify-center">
+            <div class="m-auto flex flex-column">
+              <p> class="text-3xl">Loading Entries</p>
+          {{svg-jar "circle-o-notch" class="mx-auto text-primary-500 fill-current rotate" width="48" height="48"}}
+            </div>
+          </div>
+        {{/body.loader}} 
+      {{/if}}
+    {{/t.body}}
       
     {{t.foot}}
 

@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { action, get } from "@ember/object";
+// Import { action, get } from "@ember/object";
 import { inject as service } from "@ember/service";
 
 export default class TableCellComponent extends Component {
@@ -27,7 +27,7 @@ export default class TableCellComponent extends Component {
     return /(creat|modifi)edOn/.test(this.args.column.valuePath);
   }
 
-  @action
+  /*  @action
   validate() {
     this.validationClass = "";
     if (get(this.args.changeset.error, this.property)) {
@@ -40,6 +40,7 @@ export default class TableCellComponent extends Component {
       this.validationClass = "warning";
     }
   }
+*/
 
   property = this.args.column.valuePath;
 
