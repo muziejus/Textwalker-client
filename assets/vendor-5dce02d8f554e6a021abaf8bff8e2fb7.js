@@ -6535,7 +6535,7 @@ var i="response"in s?s.response:s.responseText
 n(new g(i,r))},s.onerror=function(){o(new TypeError("Network request failed"))},s.ontimeout=function(){o(new TypeError("Network request failed"))},s.onabort=function(){o(new e.DOMException("Aborted","AbortError"))},s.open(a.method,a.url,!0),"include"===a.credentials?s.withCredentials=!0:"omit"===a.credentials&&(s.withCredentials=!1),"responseType"in s&&r.blob&&(s.responseType="blob"),a.headers.forEach(function(e,t){s.setRequestHeader(t,e)}),a.signal&&(a.signal.addEventListener("abort",u),s.onreadystatechange=function(){4===s.readyState&&a.signal.removeEventListener("abort",u)}),s.send(void 0===a._bodyInit?null:a._bodyInit)})}_.polyfill=!0,t.fetch||(t.fetch=_,t.Headers=l,t.Request=v,t.Response=g),e.Headers=l,e.Request=v,e.Response=g,e.fetch=_})({})
 if(!t.fetch)throw new Error("fetch is not defined - maybe your browser targets are not covering everything you need?")
 var o=0
-function a(e){return o--,e}e.Ember.Test?(e.Ember.Test.registerWaiter(function(){return 0===o}),t.default=function(){return o++,t.fetch.apply(e,arguments).then(function(e){return e.clone().blob().then(a,a),e},function(e){throw a(e),e})}):t.default=t.fetch,r.forEach(function(e){delete t[e]})}),define("fetch/ajax",["exports"],function(){throw new Error("You included `fetch/ajax` but it was renamed to `ember-fetch/ajax`")})})("undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this)}Ember.libraries.register("Ember Simple Auth","1.8.2"),function(e){var t="object"==typeof exports&&exports,n="object"==typeof module&&module&&module.exports==t&&module,r="object"==typeof global&&global
+function a(e){return o--,e}e.Ember.Test?(e.Ember.Test.registerWaiter(function(){return 0===o}),t.default=function(){return o++,t.fetch.apply(e,arguments).then(function(e){return e.clone().blob().then(a,a),e},function(e){throw a(e),e})}):t.default=t.fetch,r.forEach(function(e){delete t[e]})}),define("fetch/ajax",["exports"],function(){throw new Error("You included `fetch/ajax` but it was renamed to `ember-fetch/ajax`")})})("undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this)}Ember.libraries.register("Ember Simple Auth","1.9.1"),function(e){var t="object"==typeof exports&&exports,n="object"==typeof module&&module&&module.exports==t&&module,r="object"==typeof global&&global
 r.global!==r&&r.window!==r||(e=r)
 var i=function(e){this.message=e};(i.prototype=new Error).name="InvalidCharacterError"
 var o=function(e){throw new i(e)},a="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/",s=/[\t\n\f\r ]/g,u={encode:function(e){e=String(e),/[^\0-\xFF]/.test(e)&&o("The string to be encoded contains characters outside of the Latin1 range.")
@@ -10459,11 +10459,11 @@ return new Ember.RSVP.Promise(function(n,r){return t._validateData(e)?n(e):r('Co
 return new Ember.RSVP.Promise(function(n,r){e.error?r(e.error):t._validateData(e)?n(e):r('Invalid auth params - "access_token" missing.')})},invalidate:function(){return Ember.RSVP.Promise.resolve()},_validateData:function(e){return!Ember.isEmpty(e)&&!Ember.isEmpty(e.access_token)}})}),define("ember-simple-auth/authenticators/oauth2-password-grant",["exports","ember-simple-auth/authenticators/base","fetch"],function(e,t,n){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0})
 var r=Ember.assign||Ember.merge,i=Object.keys||Ember.keys
-e.default=t.default.extend({clientId:null,serverTokenEndpoint:"/token",serverTokenRevocationEndpoint:null,refreshAccessTokens:!0,tokenRefreshOffset:Ember.computed(function(){return 1e3*(Math.floor(5*Math.random())+5)}).volatile(),_refreshTokenTimeout:null,_clientIdHeader:Ember.computed("clientId",function(){var e=this.get("clientId")
+e.default=t.default.extend({clientId:null,sendClientIdAsQueryParam:!1,serverTokenEndpoint:"/token",serverTokenRevocationEndpoint:null,refreshAccessTokens:!0,get tokenRefreshOffset(){return 1e3*(Math.floor(5*Math.random())+5)},_refreshTokenTimeout:null,_clientIdHeader:Ember.computed("clientId",function(){var e=this.get("clientId")
 if(!Ember.isEmpty(e))return{Authorization:"Basic "+window.base64.encode(e.concat(":"))}}),rejectWithXhr:Ember.computed.deprecatingAlias("rejectWithResponse",{id:"ember-simple-auth.authenticator.reject-with-xhr",until:"2.0.0"}),rejectWithResponse:!1,restore:function(e){var t=this
 return new Ember.RSVP.Promise(function(n,r){var i=(new Date).getTime(),o=t.get("refreshAccessTokens")
 !Ember.isEmpty(e.expires_at)&&e.expires_at<i?o?t._refreshAccessToken(e.expires_in,e.refresh_token).then(n,r):r():t._validate(e)?(t._scheduleAccessTokenRefresh(e.expires_in,e.expires_at,e.refresh_token),n(e)):r()})},authenticate:function(e,t){var n=this,i=arguments.length>2&&void 0!==arguments[2]?arguments[2]:[],o=arguments.length>3&&void 0!==arguments[3]?arguments[3]:{}
-return new Ember.RSVP.Promise(function(a,s){var u={grant_type:"password",username:e,password:t},l=n.get("serverTokenEndpoint"),c=n.get("rejectWithResponse"),f=Ember.makeArray(i).join(" ")
+return this.get("sendClientIdAsQueryParam")||Ember.deprecate("Ember Simple Auth: Client ID as Authorization Header is deprecated in favour of Client ID as Query String Parameter.",!1,{id:"ember-simple-auth.oauth2-password-grant-authenticator.client-id-as-authorization",until:"2.0.0",url:"https://github.com/simplabs/ember-simple-auth#deprecation-of-client-id-as-header"}),new Ember.RSVP.Promise(function(a,s){var u={grant_type:"password",username:e,password:t},l=n.get("serverTokenEndpoint"),c=n.get("rejectWithResponse"),f=Ember.makeArray(i).join(" ")
 Ember.isEmpty(f)||(u.scope=f),n.makeRequest(l,u,o).then(function(e){Ember.run(function(){n._validate(e)||s("access_token is missing in server response")
 var t=n._absolutizeExpirationTime(e.expires_in)
 n._scheduleAccessTokenRefresh(e.expires_in,t,e.refresh_token),Ember.isEmpty(t)||(e=r(e,{expires_at:t})),a(e)})},function(e){Ember.run(null,s,c?e:e.responseJSON||e.responseText)})})},invalidate:function(e){var t=this,n=this.get("serverTokenRevocationEndpoint")
@@ -10472,10 +10472,11 @@ else{var o=[]
 Ember.A(["access_token","refresh_token"]).forEach(function(r){var i=e[r]
 Ember.isEmpty(i)||o.push(t.makeRequest(n,{token_type_hint:r,token:i}))})
 var a=function(){r.apply(t,[i])}
-Ember.RSVP.all(o).then(a,a)}})},makeRequest:function(e,t){var r=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{}
-r["Content-Type"]="application/x-www-form-urlencoded"
-var o={body:i(t).map(function(e){return encodeURIComponent(e)+"="+encodeURIComponent(t[e])}).join("&"),headers:r,method:"POST"},a=this.get("_clientIdHeader")
-return Ember.isEmpty(a)||Ember.merge(o.headers,a),new Ember.RSVP.Promise(function(t,r){(0,n.default)(e,o).then(function(e){e.text().then(function(n){try{var i=JSON.parse(n)
+Ember.RSVP.all(o).then(a,a)}})},makeRequest:function(e,t){var o=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{}
+if(o["Content-Type"]="application/x-www-form-urlencoded",this.get("sendClientIdAsQueryParam")){var a=this.get("clientId")
+Ember.isEmpty(a)||(t.client_id=this.get("clientId"))}var s={body:i(t).map(function(e){return encodeURIComponent(e)+"="+encodeURIComponent(t[e])}).join("&"),headers:o,method:"POST"}
+if(!this.get("sendClientIdAsQueryParam")){var u=this.get("_clientIdHeader")
+Ember.isEmpty(u)||r(s.headers,u)}return new Ember.RSVP.Promise(function(t,r){(0,n.default)(e,s).then(function(e){e.text().then(function(n){try{var i=JSON.parse(n)
 e.ok?t(i):(e.responseJSON=i,r(e))}catch(SyntaxError){e.responseText=n,r(e)}})}).catch(r)})},_scheduleAccessTokenRefresh:function(e,t,n){if(this.get("refreshAccessTokens")){var r=(new Date).getTime()
 Ember.isEmpty(t)&&!Ember.isEmpty(e)&&(t=new Date(r+1e3*e).getTime())
 var i=this.get("tokenRefreshOffset")
@@ -10543,12 +10544,13 @@ e.default=Ember.Mixin.create({session:Ember.inject.service("session"),_isFastBoo
 Ember.A([["authenticationSucceeded","sessionAuthenticated"],["invalidationSucceeded","sessionInvalidated"]]).forEach(function(t){var n=r(t,2),i=n[0],o=n[1]
 e.get("session").on(i,function(){return e[o].apply(e,arguments)})})},sessionAuthenticated:function(){var e=this.get("session.attemptedTransition"),t=Ember.getOwner(this).lookup("service:cookies"),n=t.read("ember_simple_auth-redirectTarget")
 e?(e.retry(),this.set("session.attemptedTransition",null)):n?(this.transitionTo(n),t.clear("ember_simple_auth-redirectTarget")):this.transitionTo(this.get("routeAfterAuthentication"))},sessionInvalidated:function(){Ember.testing||(this.get("_isFastBoot")?this.transitionTo(t.default.rootURL):window.location.replace(t.default.rootURL))}})}),define("ember-simple-auth/mixins/authenticated-route-mixin",["exports","ember-simple-auth/configuration","ember-simple-auth/utils/is-fastboot"],function(e,t,n){"use strict"
-Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Mixin.create({session:Ember.inject.service("session"),_isFastBoot:(0,n.default)(),authenticationRoute:Ember.computed(function(){return t.default.authenticationRoute}),beforeModel:function(e){var t=this
+Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Mixin.create({session:Ember.inject.service("session"),_router:Ember.computed(function(){var e=Ember.getOwner(this)
+return e.lookup("service:router")||e.lookup("router:main")}),_isFastBoot:(0,n.default)(),authenticationRoute:Ember.computed(function(){return t.default.authenticationRoute}),beforeModel:function(e){var t=this
 if(!function(e,t,r){var i=(0,n.isFastBoot)(e),o=e.lookup("service:session")
 if(!o.get("isAuthenticated")){if(i){var a=e.lookup("service:fastboot")
 e.lookup("service:cookies").write("ember_simple_auth-redirectTarget",t.intent.url,{path:"/",secure:"https"===a.get("request.protocol")})}else o.set("attemptedTransition",t)
 return r(),!0}}(Ember.getOwner(this),e,function(){t.triggerAuthentication()}))return this._super.apply(this,arguments)},triggerAuthentication:function(){var e=this.get("authenticationRoute")
-this.transitionTo(e)}})}),define("ember-simple-auth/mixins/data-adapter-mixin",["exports"],function(e){"use strict"
+this.get("_router").transitionTo(e)}})}),define("ember-simple-auth/mixins/data-adapter-mixin",["exports"],function(e){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=Ember.Mixin.create({session:Ember.inject.service("session"),authorizer:null,ajaxOptions:function(){var e=this,t=this._super.apply(this,arguments),n=t.beforeSend
 return t.beforeSend=function(t){if(e.get("authorizer")){var r=e.get("authorizer")
 e.get("session").authorize(r,function(e,n){t.setRequestHeader(e,n)})}else e.authorize(t)
@@ -10587,20 +10589,20 @@ Object.defineProperty(e,"__esModule",{value:!0})
 var r=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:function(){}
 return Ember.computed({get:function(e){return this.get("_"+e)},set:function(t,n){return e.apply(this,[t,n]),this.set("_"+t,n),Ember.run.scheduleOnce("actions",this,this.rewriteCookie),n}})}
 e.default=t.default.extend({_syncDataTimeout:null,_renewExpirationTimeout:null,_cookieDomain:null,cookieDomain:r(),_cookieName:"ember_simple_auth-session",cookieName:r(function(){this._oldCookieName=this._cookieName}),_cookiePath:"/",cookiePath:r(),_cookieExpirationTime:null,cookieExpirationTime:r(function(e,t){Ember.isNone(t)&&this.get("_cookies").clear(this.get("cookieName")+"-expiration_time")}),_cookies:Ember.inject.service("cookies"),_fastboot:Ember.computed(function(){var e=Ember.getOwner(this)
-return e&&e.lookup("service:fastboot")}),_secureCookies:Ember.computed(function(){return this.get("_fastboot.isFastBoot")?"https"===this.get("_fastboot.request.protocol"):"https:"===window.location.protocol}).volatile(),_isPageVisible:Ember.computed(function(){return!this.get("_fastboot.isFastBoot")&&"visible"===("undefined"!=typeof document&&(document.visibilityState||"visible"))}).volatile(),init:function(){var e=this
+return e&&e.lookup("service:fastboot")}),_secureCookies:function(){return this.get("_fastboot.isFastBoot")?"https"===this.get("_fastboot.request.protocol"):"https:"===window.location.protocol},_isPageVisible:function(){return!this.get("_fastboot.isFastBoot")&&"visible"===("undefined"!=typeof document&&(document.visibilityState||"visible"))},init:function(){var e=this
 this._super.apply(this,arguments)
 var t=this._read(this.get("cookieName")+"-expiration_time")
 t&&this.set("cookieExpirationTime",parseInt(t,10)),this.get("_fastboot.isFastBoot")?this._renew():Ember.run.next(function(){e._syncData().then(function(){e._renewExpiration()})})},persist:function(e){this._lastData=e,e=JSON.stringify(e||{})
 var t=this._calculateExpirationTime()
 return this._write(e,t),Ember.RSVP.resolve()},restore:function(){var e=this._read(this.get("cookieName"))
 return Ember.isEmpty(e)?Ember.RSVP.resolve({}):Ember.RSVP.resolve(JSON.parse(e))},clear:function(){return this._write("",0),this._lastData={},Ember.RSVP.resolve()},_read:function(e){return this.get("_cookies").read(e)||""},_calculateExpirationTime:function(){var e=this._read(this.get("cookieName")+"-expiration_time")
-return e=e?(new Date).getTime()+1e3*e:null,this.get("cookieExpirationTime")?(new Date).getTime()+1e3*this.get("cookieExpirationTime"):e},_write:function(e,t){var n=this,r={domain:this.get("cookieDomain"),expires:Ember.isEmpty(t)?null:new Date(t),path:this.get("cookiePath"),secure:this.get("_secureCookies")}
+return e=e?(new Date).getTime()+1e3*e:null,this.get("cookieExpirationTime")?(new Date).getTime()+1e3*this.get("cookieExpirationTime"):e},_write:function(e,t){var n=this,r={domain:this.get("cookieDomain"),expires:Ember.isEmpty(t)?null:new Date(t),path:this.get("cookiePath"),secure:this._secureCookies()}
 if(this._oldCookieName&&(Ember.A([this._oldCookieName,this._oldCookieName+"-expiration_time"]).forEach(function(e){n.get("_cookies").clear(e)}),delete this._oldCookieName),this.get("_cookies").write(this.get("cookieName"),e,r),!Ember.isEmpty(t)){var i=this.get("cookieName")+"-expiration_time",o=this.get("_cookies").read(i)
 this.get("_cookies").write(i,this.get("cookieExpirationTime")||o,r)}},_syncData:function(){var e=this
 return this.restore().then(function(t){(0,n.default)(t,e._lastData)||(e._lastData=t,e.trigger("sessionDataUpdated",t)),Ember.testing||(Ember.run.cancel(e._syncDataTimeout),e._syncDataTimeout=Ember.run.later(e,e._syncData,500))})},_renew:function(){var e=this
 return this.restore().then(function(t){if(!Ember.isEmpty(t)&&t!=={}){t="string"===Ember.typeOf(t)?t:JSON.stringify(t||{})
 var n=e._calculateExpirationTime()
-e._write(t,n)}})},_renewExpiration:function(){return Ember.testing||(Ember.run.cancel(this._renewExpirationTimeout),this._renewExpirationTimeout=Ember.run.later(this,this._renewExpiration,6e4)),this.get("_isPageVisible")?this._renew():Ember.RSVP.resolve()},rewriteCookie:function(){var e=this._oldCookieName||this._cookieName,t=this._read(e)
+e._write(t,n)}})},_renewExpiration:function(){return Ember.testing||(Ember.run.cancel(this._renewExpirationTimeout),this._renewExpirationTimeout=Ember.run.later(this,this._renewExpiration,6e4)),this._isPageVisible()?this._renew():Ember.RSVP.resolve()},rewriteCookie:function(){var e=this._oldCookieName||this._cookieName,t=this._read(e)
 if(Ember.isPresent(t)){var n=this._calculateExpirationTime()
 this._write(t,n)}}})}),define("ember-simple-auth/session-stores/ephemeral",["exports","ember-simple-auth/session-stores/base"],function(e,t){"use strict"
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=t.default.extend({init:function(){this._super.apply(this,arguments),this.clear()},persist:function(e){return this._data=JSON.stringify(e||{}),Ember.RSVP.resolve()},restore:function(){var e=JSON.parse(this._data)||{}
