@@ -82,7 +82,6 @@ export default class EntryGridComponent extends Component {
 
   @action
   setActiveEntry(entry) {
-    console.log("entries", entry, this.activeEntry);
     if (this.activeEntry !== null && this.activeEntry !== entry) {
       if (
         !this._isEquivalentEntry(this.activeEntry, this.activeUntrackedEntry)
@@ -144,7 +143,9 @@ export default class EntryGridComponent extends Component {
 
       const label = propObj.inputLabel || capitalize(propObj.name);
       const valuePath = `properties.${propObj.name}`;
-      if (
+      if (this.currentContributor.contributor.admin) {
+        this.columns.pushObject({ valuePath, width, label, property: propObj });
+      } else if (
         propObj.owner === this.currentContributor.contributor.id ||
         propObj.owner === "admin"
       ) {
