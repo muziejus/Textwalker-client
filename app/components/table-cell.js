@@ -68,6 +68,10 @@ export default class TableCellComponent extends Component {
   }
 
   get isDisabled() {
+    if (this.currentContributor.contributor.admin) {
+      return false;
+    }
+
     if (this.args.column.property) {
       return (
         this.args.column.property.readOnly ||
