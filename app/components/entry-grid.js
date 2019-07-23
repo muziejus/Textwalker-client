@@ -20,6 +20,10 @@ export default class EntryGridComponent extends Component {
 
   activeUntrackedEntry = null;
 
+  get isAdmin() {
+    return this.currentContributor.contributor.admin;
+  }
+
   @tracked model = [];
 
   @tracked columns = [
@@ -134,6 +138,18 @@ export default class EntryGridComponent extends Component {
   fetchRecords;
 
   _buildColumns() {
+    if (this.isAdmin) {
+      this.columns.pushObject({
+        label: "Entry ID",
+        valuePath: "id",
+        width: "100px",
+        property: {
+          owner: "admin",
+          help: "Database ID"
+        }
+      });
+    }
+
     const { text } = this.args;
     text.entryProperties.forEach(propObj => {
       let width = "150px";
@@ -143,7 +159,7 @@ export default class EntryGridComponent extends Component {
 
       const label = propObj.inputLabel || capitalize(propObj.name);
       const valuePath = `properties.${propObj.name}`;
-      if (this.currentContributor.contributor.admin) {
+      if (this.isAdmin) {
         this.columns.pushObject({ valuePath, width, label, property: propObj });
       } else if (
         propObj.owner === this.currentContributor.contributor.id ||

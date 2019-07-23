@@ -18,6 +18,12 @@
     </div>
   {{else if this.isDate}}
     {{moment-format (get @changeset this.property) "YYYY-MM-DD"}}
+  {{else if this.isId}}
+    {{input
+      value=(get @changeset this.property)
+      disabled=true
+      class=(concat "inline-editor table-edit-input entry-property-" this.property " entry-id-" (get @changeset "id") " " this.validationClass)
+    }}
   {{else}}
     {{input
       type=this.inputType

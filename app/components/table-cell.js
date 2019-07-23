@@ -25,6 +25,10 @@ export default class TableCellComponent extends Component {
     return htmlSafe("width: " + this.args.column.width + ";");
   }
 
+  get isId() {
+    return this.args.column.valuePath === "id";
+  }
+
   get isPlace() {
     return this.args.column.valuePath === "place";
   }

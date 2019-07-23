@@ -8,9 +8,7 @@
       <thead>
         <tr>
           {{#each this.columns as |column|}}
-            {{#component "table-column-header" columnContent=column}}
-              {{column.label}}
-            {{/component}}
+            <TableColumnHeader @columnContent={{column}} />
           {{/each}}
         </tr>
       </thead>
