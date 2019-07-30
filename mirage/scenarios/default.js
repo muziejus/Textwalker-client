@@ -23,8 +23,10 @@ export default function(server) {
     geonameId: 3895114
   });
   const muziejus = server.create("contributor", {
+    enabled: true,
     id: "muziejus",
     firstName: "Moacir",
+    lastName: "Mirage",
     admin: true
   });
   const text = server.create("text", {

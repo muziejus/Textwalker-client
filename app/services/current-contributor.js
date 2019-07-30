@@ -1,5 +1,6 @@
 import Service, { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
+import config from "wandertext/config/environment";
 
 export default class CurrentContributorService extends Service {
   @service session;
@@ -12,18 +13,27 @@ export default class CurrentContributorService extends Service {
     if (this.session.isAuthenticated) {
       if (!this.contributor) {
         try {
-          const { email } = this.session.data.authenticated.user;
-          const query = await this.store.query("contributor", {
-            query: ref => ref.where("email", "==", email)
-          });
-          const contributor = query.firstObject;
-          if (contributor.enabled) {
-            this.contributor = contributor;
+          if (config.environment === "production") {
+            const { email } = this.session.data.authenticated.user;
+            const query = await this.store.query("contributor", {
+              query: ref => ref.where("email", "==", email)
+            });
+            const contributor = query.firstObject;
+            if (contributor.enabled) {
+              this.contributor = contributor;
+              return this.contributor;
+            }
+
+            throw new Error("user is not enabled");
+          } else {
+            this.contributor = await this.store.findRecord(
+              "contributor",
+              "muziejus"
+            );
             return this.contributor;
           }
-
-          throw new Error("user is not enabled");
-        } catch {
+        } catch (error) {
+          console.log(error);
           this.session.invalidate();
         }
       }

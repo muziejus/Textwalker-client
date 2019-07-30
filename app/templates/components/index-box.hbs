@@ -25,7 +25,7 @@
       Google account by clicking on the button below.</p>
 
     <Button @classes="login-button" @onClick={{action this.toggleModal}}>
-      Login via Google
+      Login via {{ this.loginProvider }}
     </Button>
 
     {{#if this.isShowingModal}}

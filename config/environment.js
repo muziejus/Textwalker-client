@@ -6,7 +6,6 @@ module.exports = function(environment) {
     environment,
     rootURL: "/",
     locationType: "auto",
-    firestoreOn: true,
     firebase: {
       apiKey: process.env.FIREBASE_APIKEY,
       authDomain: process.env.FIREBASE_AUTHDOMAIN,
@@ -60,47 +59,20 @@ module.exports = function(environment) {
       process.env.GITHUB_DEV_REDIRECT_URI;
     ENV.torii.providers["github-oauth2"].tokenExchangeUri =
       process.env.DEV_TOKEN_EXCHANGE_URL;
-    if (ENV.firestoreOn) {
-      ENV.firebase = {
-        apiKey: process.env.FIREBASE_APIKEY,
-        authDomain: process.env.FIREBASE_AUTHDOMAIN,
-        databaseURL: process.env.FIREBASE_DATABASEURL,
-        projectId: process.env.FIREBASE_PROJECTID,
-        storageBucket: process.env.FIREBASE_STORAGEBUCKET,
-        messagingSenderId: process.env.FIREBASE_MESSAGINGSENDERID
-      };
-      ENV["ember-cli-mirage"] = { enabled: false };
-    } else {
-      ENV.backendHost = "";
-    }
   }
 
   if (environment === "test") {
     // Testem prefers this...
     ENV.locationType = "none";
-    ENV.torii.providers["github-oauth2"].apiKey =
-      process.env.GITHUB_DEV_CLIENT_ID;
-    ENV.torii.providers["github-oauth2"].redirectUri =
-      process.env.GITHUB_DEV_REDIRECT_URI;
-    ENV.torii.providers["github-oauth2"].tokenExchangeUri =
-      process.env.TEST_TOKEN_EXCHANGE_URL;
-
     // Keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false;
     ENV.APP.LOG_VIEW_LOOKUPS = false;
 
     ENV.APP.rootElement = "#ember-testing";
     ENV.APP.autoboot = false;
-    ENV.backendHost = "";
   }
 
   if (environment === "production") {
-    ENV.torii.providers["github-oauth2"].apiKey =
-      process.env.GITHUB_PRODUCTION_CLIENT_ID;
-    ENV.torii.providers["github-oauth2"].redirectUri =
-      process.env.GITHUB_PRODUCTION_REDIRECT_URI;
-    ENV.torii.providers["github-oauth2"].tokenExchangeUri =
-      process.env.PRODUCTION_TOKEN_EXCHANGE_URL;
     ENV["ember-cli-mirage"] = { enabled: false };
   }
 
