@@ -3,6 +3,7 @@ import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
 import { htmlSafe, capitalize } from "@ember/string";
 import { action } from "@ember/object";
+// import { sort } from "@ember/object/computed";
 import {
   validateNumber,
   validatePresence
@@ -125,14 +126,21 @@ export default class EntryGridComponent extends Component {
 
   @(task(function*() {
     const records = yield this.store.query("entry", {
-      query: ref =>
-        ref
-          .where("text", "==", "baburnama-1530") // Hardcode this in.
-          .where("properties.folio", "==", this.page)
-          // .orderBy("properties.folio", "asc")
-          .orderBy("properties.sequence", "asc")
-          .limit(this.limit)
+      filter: {
+        text: "baburnama-1530"
+      }
     });
+    // Records = sort(
+
+    // const records = yield this.store.query("entry", {
+    //   query: ref =>
+    //     ref
+    //       .where("text", "==", "baburnama-1530") // Hardcode this in.
+    //       .where("properties.folio", "==", this.page)
+    //       // .orderBy("properties.folio", "asc")
+    //       .orderBy("properties.sequence", "asc")
+    //       .limit(this.limit)
+    // });
     this.model.pushObjects(records.toArray());
   }).restartable())
   fetchRecords;
