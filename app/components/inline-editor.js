@@ -2,6 +2,7 @@ import Component from "@glimmer/component";
 import { action } from "@ember/object";
 
 export default class InlineEditorComponent extends Component {
+  @action
   focusOnInput() {
     const children = [...this.element.children];
 

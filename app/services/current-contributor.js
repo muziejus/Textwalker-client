@@ -1,3 +1,4 @@
+/* eslint no-console: 1 */
 import Service, { inject as service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
 import config from "wandertext/config/environment";
