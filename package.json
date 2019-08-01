@@ -72,8 +72,10 @@
     "ember-simple-auth": "^1.9.2",
     "ember-source": "https://s3.amazonaws.com/builds.emberjs.com/canary/shas/cb4233bf416127d626304fa33ca9125310a7d959.tgz",
     "ember-svg-jar": "^1.2.2",
+    "ember-template-lint": "^1.5.0",
     "ember-tooltips": "^3.3.3",
     "emberfire": "^3.0.0-rc.3",
+    "eslint": "^6.1.0",
     "eslint-plugin-chai-friendly": "^0.4.1",
     "eslint-plugin-ember": "^6.7.1",
     "eslint-plugin-node": "^9.0.1",
@@ -164,6 +166,7 @@
     }
   },
   "optionalDependencies": {
+    "@babel/core": "^7.5.5",
     "broccoli-funnel": "^2.0.2",
     "chai": "^4.2.0",
     "d3-array": "^2.0.3",
