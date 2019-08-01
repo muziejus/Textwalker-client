@@ -3,7 +3,6 @@ import { tracked } from "@glimmer/tracking";
 import { inject as service } from "@ember/service";
 import { htmlSafe, capitalize } from "@ember/string";
 import { action } from "@ember/object";
-// import { sort } from "@ember/object/computed";
 import {
   validateNumber,
   validatePresence
