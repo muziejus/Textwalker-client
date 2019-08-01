@@ -1,3 +1,5 @@
+{{! template-lint-disable no-inline-styles no-implicit-this}}
+{{! no-implicit-this needed because of target.value in the input helper.}}
 <td class={{ this.classes }} style={{this.cellWidth}}>
   {{#if this.isPlace}}
     <div class="flex flex-row">

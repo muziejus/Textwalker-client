@@ -9,7 +9,7 @@
 
   {{#if @text.entryProperties}}
     {{#each @text.entryProperties as |prop|}}
-    <p>{{input id=(concat "input-entryProperty-" prop.name) type="text" value=(get this.entry.properties prop.name) placeholder=prop.name}}</p>
+      <p>{{input id=(concat "input-entryProperty-" prop.name) type="text" value=(get this.entry.properties prop.name) placeholder=prop.name}}</p>
     {{/each}}
   {{/if}}
 
