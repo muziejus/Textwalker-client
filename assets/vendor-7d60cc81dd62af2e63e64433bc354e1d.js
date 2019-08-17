@@ -8468,9 +8468,9 @@ e.default=r}),define("ember-data-storefront/mixins/fastboot-adapter",["exports",
 Object.defineProperty(e,"__esModule",{value:!0}),e.default=void 0
 var n=Ember.Mixin.create({fastboot:Ember.inject.service(),storefront:Ember.inject.service(),ajax:function(e,t){var n=arguments.length>2&&void 0!==arguments[2]?arguments[2]:{},r=this._getStorefrontBoxedQuery(t,e,n.data),i=this._makeStorefrontQueryBoxer(t,e,n.data)
 return r?Ember.RSVP.resolve(JSON.parse(r)):this._super.apply(this,arguments).then(i)},_makeStorefrontQueryBoxer:function(e,n,r){var i=this.get("fastboot"),o=i&&i.get("isFastBoot"),a=this.get("storefront.fastbootDataRequests")
-return function(i){if(o){var s=(0,t.shoeboxize)((0,t.cacheKey)([e,n,r]))
+return function(i){if(o){var s=(0,t.shoeboxize)((0,t.cacheKey)([e,n.replace(/^.*\/\/[^\/]+/,""),r]))
 a[s]=JSON.stringify(i)}return i}},_getStorefrontBoxedQuery:function(e,n,r){var i,o=this.get("fastboot"),a=o&&o.get("isFastBoot"),s=o&&o.get("shoebox"),u=s&&s.retrieve("ember-data-storefront")
-if(!a&&u&&u.queries&&Object.keys(u.queries).length>0){var c=(0,t.shoeboxize)((0,t.cacheKey)([e,n,r]))
+if(!a&&u&&u.queries&&Object.keys(u.queries).length>0){var c=(0,t.shoeboxize)((0,t.cacheKey)([e,n.replace(/^.*\/\/[^\/]+/,""),r]))
 i=u.queries[c],delete u.queries[c]}return i}})
 e.default=n}),define("ember-data-storefront/mixins/loadable-model",["exports"],function(e){"use strict"
 function t(e){return function(e){if(Array.isArray(e))return e}(e)||function(e){if(Symbol.iterator in Object(e)||"[object Arguments]"===Object.prototype.toString.call(e))return Array.from(e)}(e)||function(){throw new TypeError("Invalid attempt to destructure non-iterable instance")}()}function n(e,t){var n=Object.keys(e)
@@ -9095,7 +9095,8 @@ t=i[0],n=a[0],r=a[1]}"template"===n&&0===t.lastIndexOf("components/",0)&&(r="com
 var s=r,u=Ember.get(this,"namespace")
 return{parsedName:!0,fullName:e,prefix:t||this.prefix({type:n}),type:n,fullNameWithoutType:s,name:r,root:u,resolveMethodName:"resolve"+Ember.String.classify(n)}},pluralizedTypes:null,moduleRegistry:null,makeToString:function(e,t){return this.namespace.modulePrefix+"@"+t+":"},shouldWrapInClassFactory:function(){return!1},init:function(){this._super(),this.moduleBasedResolver=!0,this._moduleRegistry||(this._moduleRegistry=new r),this._normalizeCache=(0,n.default)(),this.pluralizedTypes=this.pluralizedTypes||(0,n.default)(),this.pluralizedTypes.config||(this.pluralizedTypes.config="config"),this._deprecatedPodModulePrefix=!1},normalize:function(e){return this._normalizeCache[e]||(this._normalizeCache[e]=this._normalize(e))},resolve:function(e){var t=this.parseName(e),n=t.resolveMethodName,r=void 0
 return"function"==typeof this[n]&&(r=this[n](t)),null==r&&(r=this.resolveOther(t)),r},_normalize:function(e){var t=e.split(":")
-return t.length>1?"helper"===t[0]?t[0]+":"+t[1].replace(/_/g,"-"):t[0]+":"+Ember.String.dasherize(t[1].replace(/\./g,"/")):e},pluralize:function(e){return this.pluralizedTypes[e]||(this.pluralizedTypes[e]=e+"s")},podBasedLookupWithPrefix:function(e,t){var n=t.fullNameWithoutType
+if(t.length>1){var n=t[0]
+return"component"===n||"helper"===n||"template"===n&&0===t[1].indexOf("components/")?n+":"+t[1].replace(/_/g,"-"):n+":"+Ember.String.dasherize(t[1].replace(/\./g,"/"))}return e},pluralize:function(e){return this.pluralizedTypes[e]||(this.pluralizedTypes[e]=e+"s")},podBasedLookupWithPrefix:function(e,t){var n=t.fullNameWithoutType
 return"template"===t.type&&(n=n.replace(/^components\//,"")),e+"/"+n+"/"+t.type},podBasedModuleName:function(e){var t=this.namespace.podModulePrefix||this.namespace.modulePrefix
 return this.podBasedLookupWithPrefix(t,e)},podBasedComponentsInSubdir:function(e){var t=this.namespace.podModulePrefix||this.namespace.modulePrefix
 if(t+="/components","component"===e.type||/^components/.test(e.fullNameWithoutType))return this.podBasedLookupWithPrefix(t,e)},resolveEngine:function(e){var t=e.fullNameWithoutType+"/engine"
