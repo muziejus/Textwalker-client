@@ -26,7 +26,7 @@ function P(e){switch(e){case C.RUNNING:case C.PAUSING:case C.CANCELING:return x.
 case C.PAUSED:return x.PAUSED
 case C.SUCCESS:return x.SUCCESS
 case C.CANCELED:return x.CANCELED
-case C.ERROR:default:return x.ERROR}}function I(e){return null!=e}function L(e){return void 0!==e}function D(e){return"function"==typeof e}function M(e){return"object"===a(e)}function W(e){return M(e)&&null!==e}function j(e){return"string"==typeof e||e instanceof String}function B(e){return G(e)&&Number.isInteger(e)}function G(e){return"number"==typeof e||e instanceof Number}function q(e){return F()&&e instanceof Blob}function F(){return"undefined"!=typeof Blob}!function(e){e[e.NO_ERROR=0]="NO_ERROR",e[e.NETWORK_ERROR=1]="NETWORK_ERROR",e[e.ABORT=2]="ABORT"}(O||(O={}))
+case C.ERROR:default:return x.ERROR}}function I(e){return null!=e}function L(e){return void 0!==e}function D(e){return"function"==typeof e}function M(e){return"object"===a(e)}function W(e){return M(e)&&null!==e}function B(e){return"string"==typeof e||e instanceof String}function G(e){return j(e)&&Number.isInteger(e)}function j(e){return"number"==typeof e||e instanceof Number}function q(e){return F()&&e instanceof Blob}function F(){return"undefined"!=typeof Blob}!function(e){e[e.NO_ERROR=0]="NO_ERROR",e[e.NETWORK_ERROR=1]="NETWORK_ERROR",e[e.ABORT=2]="ABORT"}(O||(O={}))
 var H=function(){function e(){var e=this
 this.sent_=!1,this.xhr_=new XMLHttpRequest,this.errorCode_=O.NO_ERROR,this.sendPromise_=new Promise(function(t){e.xhr_.addEventListener("abort",function(){e.errorCode_=O.ABORT,t(e)}),e.xhr_.addEventListener("error",function(){e.errorCode_=O.NETWORK_ERROR,t(e)}),e.xhr_.addEventListener("load",function(){t(e)})})}return e.prototype.send=function(e,t,r,n){if(this.sent_)throw R("cannot .send() more than once")
 if(this.sent_=!0,this.xhr_.open(t,e,!0),I(n))for(var o in n)n.hasOwnProperty(o)&&this.xhr_.setRequestHeader(o,n[o].toString())
@@ -42,7 +42,7 @@ throw Error("This browser doesn't seem to support creating Blobs")}var V=functio
 q(e)?(this.data_=e,r=e.size,n=e.type):e instanceof ArrayBuffer?(t?this.data_=new Uint8Array(e):(this.data_=new Uint8Array(e.byteLength),this.data_.set(new Uint8Array(e))),r=this.data_.length):e instanceof Uint8Array&&(t?this.data_=e:(this.data_=new Uint8Array(e.length),this.data_.set(e)),r=e.length),this.size_=r,this.type_=n}return e.prototype.size=function(){return this.size_},e.prototype.type=function(){return this.type_},e.prototype.slice=function(t,r){if(q(this.data_)){var n=function(e,t,r){return e.webkitSlice?e.webkitSlice(t,r):e.mozSlice?e.mozSlice(t,r):e.slice?e.slice(t,r):null}(this.data_,t,r)
 return null===n?null:new e(n)}return new e(new Uint8Array(this.data_.buffer,t,r-t),!0)},e.getBlob=function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r]
 if(F()){var n=t.map(function(t){return t instanceof e?t.data_:t})
-return new e(X.apply(null,n))}var o=t.map(function(e){return j(e)?U(w.RAW,e).data:e.data_}),i=0
+return new e(X.apply(null,n))}var o=t.map(function(e){return B(e)?U(w.RAW,e).data:e.data_}),i=0
 o.forEach(function(e){i+=e.byteLength})
 var a=new Uint8Array(i),s=0
 return o.forEach(function(e){for(var t=0;t<e.length;t++)a[s++]=e[t]}),new e(a,!0)},e.prototype.uploadData=function(){return this.data_},e}(),K=function(){function e(e,t){this.bucket=e,this.path_=t}return Object.defineProperty(e.prototype,"path",{get:function(){return this.path_},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"isRoot",{get:function(){return 0===this.path.length},enumerable:!0,configurable:!0}),e.prototype.fullServerUrl=function(){var e=encodeURIComponent
@@ -66,16 +66,16 @@ i.writable&&(r[i.server]=e[i.local])}return JSON.stringify(r)}function oe(e){if(
 for(var t in e)if(e.hasOwnProperty(t)){var r=e[t]
 if("customMetadata"===t){if(!M(r))throw"Expected object for 'customMetadata' mapping."}else if(W(r))throw"Mapping for '"+t+"' cannot be an object."}}var ie="maxResults",ae=1e3,se="pageToken",ue="prefixes",ce="items"
 function le(e){if(!M(e)||!e)throw"Expected ListOptions object."
-for(var t in e)if(t===ie){if(!B(e[ie])||e[ie]<=0)throw"Expected maxResults to be a positive number."
+for(var t in e)if(t===ie){if(!G(e[ie])||e[ie]<=0)throw"Expected maxResults to be a positive number."
 if(e[ie]>1e3)throw"Expected maxResults to be less than or equal to "+ae+"."}else{if(t!==se)throw"Unknown option: "+t
-if(e[se]&&!j(e[se]))throw"Expected pageToken to be string."}}var pe=function(e,t,r,n){this.url=e,this.method=t,this.handler=r,this.timeout=n,this.urlParams={},this.headers={},this.body=null,this.errorHandler=null,this.progressCallback=null,this.successCodes=[200],this.additionalRetryCodes=[]}
+if(e[se]&&!B(e[se]))throw"Expected pageToken to be string."}}var pe=function(e,t,r,n){this.url=e,this.method=t,this.handler=r,this.timeout=n,this.urlParams={},this.headers={},this.body=null,this.errorHandler=null,this.progressCallback=null,this.successCodes=[200],this.additionalRetryCodes=[]}
 function he(e){if(!e)throw _()}function fe(e,t){return function(r,n){var o=re(e,n,t)
 return he(null!==o),o}}function de(e){return function(t,r){var n=function(e,t){var r=Z(t)
-return null===r?null:function(e,t){var r,n,o,a,s={prefixes:[],items:[],nextPageToken:t.nextPageToken},c=e.bucket()
-if(null===c)throw new h(f.NO_DEFAULT_BUCKET,"No default bucket found. Did you set the '"+u+"' property when initializing the app?")
-if(t[ue])try{for(var l=Object(i.__values)(t[ue]),p=l.next();!p.done;p=l.next()){var d=p.value.replace(/\/$/,""),_=e.makeStorageReference(new K(c,d))
-s.prefixes.push(_)}}catch(e){r={error:e}}finally{try{p&&!p.done&&(n=l.return)&&n.call(l)}finally{if(r)throw r.error}}if(t[ce])try{for(var m=Object(i.__values)(t[ce]),v=m.next();!v.done;v=m.next()){var b=v.value
-_=e.makeStorageReference(new K(c,b.name)),s.items.push(_)}}catch(e){o={error:e}}finally{try{v&&!v.done&&(a=m.return)&&a.call(m)}finally{if(o)throw o.error}}return s}(e,r)}(e,r)
+return null===r?null:function(e,t){var r={prefixes:[],items:[],nextPageToken:t.nextPageToken},n=e.bucket()
+if(null===n)throw new h(f.NO_DEFAULT_BUCKET,"No default bucket found. Did you set the '"+u+"' property when initializing the app?")
+if(t[ue])for(var o=0,i=t[ue];o<i.length;o++){var a=i[o].replace(/\/$/,""),s=e.makeStorageReference(new K(n,a))
+r.prefixes.push(s)}if(t[ce])for(var c=0,l=t[ce];c<l.length;c++){var p=l[c]
+s=e.makeStorageReference(new K(n,p.name)),r.items.push(s)}return r}(e,r)}(e,r)
 return he(null!==n),n}}function _e(e){return function(t,r){var n,o,i
 return 401===t.getStatus()?n=new h(f.UNAUTHENTICATED,"User is not authenticated, please authenticate using Firebase Authentication and try again."):402===t.getStatus()?(i=e.bucket,n=new h(f.QUOTA_EXCEEDED,"Quota for bucket '"+i+"' exceeded, please view quota on https://firebase.google.com/pricing/.")):403===t.getStatus()?(o=e.path,n=new h(f.UNAUTHORIZED,"User does not have permission to access '"+o+"'.")):n=r,n.setServerResponseProp(r.serverResponseProp()),n}}function me(e){var t=_e(e)
 return function(r,n){var o,i=t(r,n)
@@ -83,7 +83,7 @@ return 404===r.getStatus()&&(o=e.path,i=new h(f.OBJECT_NOT_FOUND,"Object '"+o+"'
 return i.errorHandler=me(t),i}function be(e,t,r){var n=Q(t.fullServerUrl()),o=e.maxOperationRetryTime(),i=new pe(n,"GET",function(e,t){return function(r,n){var o=re(e,n,t)
 return he(null!==o),function(e,t){var r=Z(t)
 if(null===r)return null
-if(!j(r.downloadTokens))return null
+if(!B(r.downloadTokens))return null
 var n=r.downloadTokens
 if(0===n.length)return null
 var o=encodeURIComponent
@@ -100,10 +100,10 @@ break}var a,s,u,c,l,p
 if(!(n<=r.length&&r.length<=o))throw a=n,s=o,u=e,c=r.length,a===s?(l=a,p=1===a?"argument":"arguments"):(l="between "+a+" and "+s,p="arguments"),new h(f.INVALID_ARGUMENT_COUNT,"Invalid argument count in `"+u+"`: Expected "+l+" "+p+", received "+c+".")
 for(i=0;i<r.length;i++)try{t[i].validator(r[i])}catch(t){throw t instanceof Error?b(i,e,t.message):b(i,e,t)}}var Ue=function(e,t){var r=this
 this.validator=function(t){r.optional&&!L(t)||e(t)},this.optional=!!t}
-function Ae(e,t){function r(e){if(!j(e))throw"Expected string."}var n,o,i
-return e?(o=r,i=e,n=function(e){o(e),i(e)}):n=r,new Ue(n,t)}function Ne(e){return new Ue(oe,e)}function Oe(e){return new Ue(le,e)}function ke(){return new Ue(function(e){if(!(G(e)&&e>=0))throw"Expected a number 0 or greater."})}function Se(e,t){return new Ue(function(t){if(!(null===t||I(t)&&t instanceof Object))throw"Expected an Object."
+function Ae(e,t){function r(e){if(!B(e))throw"Expected string."}var n,o,i
+return e?(o=r,i=e,n=function(e){o(e),i(e)}):n=r,new Ue(n,t)}function Ne(e){return new Ue(oe,e)}function Oe(e){return new Ue(le,e)}function ke(){return new Ue(function(e){if(!(j(e)&&e>=0))throw"Expected a number 0 or greater."})}function Se(e,t){return new Ue(function(t){if(!(null===t||I(t)&&t instanceof Object))throw"Expected an Object."
 null!=e&&e(t)},t)}function Ce(e){return new Ue(function(e){if(null!==e&&!D(e))throw"Expected a Function."},e)}function xe(e){return function(){for(var t=[],r=0;r<arguments.length;r++)t[r]=arguments[r]
-Promise.resolve().then(function(){return e.apply(void 0,Object(i.__spread)(t))})}}var Pe=function(){function e(e,t,r,n,o,i){var a=this
+Promise.resolve().then(function(){return e.apply(void 0,t)})}}var Pe=function(){function e(e,t,r,n,o,i){var a=this
 void 0===i&&(i=null),this.transferred_=0,this.needToFetchStatus_=!1,this.needToFetchMetadata_=!1,this.observers_=[],this.error_=null,this.uploadUrl_=null,this.request_=null,this.chunkMultiplier_=1,this.resolve_=null,this.reject_=null,this.ref_=e,this.authWrapper_=t,this.location_=r,this.blob_=o,this.metadata_=i,this.mappings_=n,this.resumable_=this.shouldDoResumable_(this.blob_),this.state_=C.RUNNING,this.errorHandler_=function(e){a.request_=null,a.chunkMultiplier_=1,e.codeEquals(f.CANCELED)?(a.needToFetchStatus_=!0,a.completeTransitions_()):(a.error_=e,a.transition_(C.ERROR))},this.metadataErrorHandler_=function(e){a.request_=null,e.codeEquals(f.CANCELED)?a.completeTransitions_():(a.error_=e,a.transition_(C.ERROR))},this.promise_=new Promise(function(e,t){a.resolve_=e,a.reject_=t,a.start_()}),this.promise_.then(null,function(){})}return e.prototype.makeProgressCallback_=function(){var e=this,t=this.transferred_
 return function(r){return e.updateProgress_(t+r)}},e.prototype.shouldDoResumable_=function(e){return e.size()>262144},e.prototype.start_=function(){this.state_===C.RUNNING&&null===this.request_&&(this.resumable_?null===this.uploadUrl_?this.createResumable_():this.needToFetchStatus_?this.fetchStatus_():this.needToFetchMetadata_?this.fetchMetadata_():this.continueUpload_():this.oneShotUpload_())},e.prototype.resolveToken_=function(e){var t=this
 this.authWrapper_.getAuthToken().then(function(r){switch(t.state_){case C.RUNNING:e(r)
@@ -113,7 +113,7 @@ break
 case C.PAUSING:t.transition_(C.PAUSED)}})},e.prototype.createResumable_=function(){var e=this
 this.resolveToken_(function(t){var r=function(e,t,r,n,o){var i=t.bucketOnlyServerUrl(),a=ge(t,n,o),s={name:a.fullPath},u=Q(i),c={"X-Goog-Upload-Protocol":"resumable","X-Goog-Upload-Command":"start","X-Goog-Upload-Header-Content-Length":n.size(),"X-Goog-Upload-Header-Content-Type":a.contentType,"Content-Type":"application/json; charset=utf-8"},l=ne(a,r),p=e.maxUploadRetryTime(),h=new pe(u,"POST",function(e){var t
 Re(e)
-try{t=e.getResponseHeader("X-Goog-Upload-URL")}catch(e){he(!1)}return he(j(t)),t},p)
+try{t=e.getResponseHeader("X-Goog-Upload-URL")}catch(e){he(!1)}return he(B(t)),t},p)
 return h.urlParams=s,h.headers=c,h.body=l,h.errorHandler=_e(t),h}(e.authWrapper_,e.location_,e.mappings_,e.blob_,e.metadata_),n=e.authWrapper_.makeRequest(r,t)
 e.request_=n,n.getPromise().then(function(t){e.request_=null,e.uploadUrl_=t,e.needToFetchStatus_=!1,e.completeTransitions_()},e.errorHandler_)})},e.prototype.fetchStatus_=function(){var e=this,t=this.uploadUrl_
 this.resolveToken_(function(r){var n=function(e,t,r,n){var o=e.maxUploadRetryTime(),i=new pe(r,"POST",function(e){var t=Re(e,["active","final"]),r=null
@@ -187,7 +187,7 @@ return e&&this.transition_(C.CANCELING),e},e}(),Ie=function(){function e(e,t){th
 var e=[]
 e.push(new ee("bucket")),e.push(new ee("generation")),e.push(new ee("metageneration")),e.push(new ee("name","fullPath",!0))
 var t=new ee("name")
-t.xform=function(e,t){return function(e){return!j(e)||e.length<2?e:J(e)}(t)},e.push(t)
+t.xform=function(e,t){return function(e){return!B(e)||e.length<2?e:J(e)}(t)},e.push(t)
 var r=new ee("size")
 return r.xform=function(e,t){return I(t)?Number(t):t},e.push(r),e.push(new ee("timeCreated")),e.push(new ee("updated")),e.push(new ee("md5Hash",null,!0)),e.push(new ee("cacheControl",null,!0)),e.push(new ee("contentDisposition",null,!0)),e.push(new ee("contentEncoding",null,!0)),e.push(new ee("contentLanguage",null,!0)),e.push(new ee("contentType",null,!0)),e.push(new ee("metadata","customMetadata",!0)),te=e}()},e.prototype.child=function(e){Te("child",[Ae()],arguments)
 var t=function(e,t){var r=t.split("/").filter(function(e){return e.length>0}).join("/")
@@ -206,9 +206,9 @@ return o.successCodes=[200,204],o.errorHandler=me(t),o}(e.authWrapper,e.location
 return e.authWrapper.makeRequest(r,t).getPromise()})},e.prototype.listAll=function(){Te("listAll",[],arguments)
 var e={prefixes:[],items:[]}
 return this.listAllHelper(e).then(function(){return e})},e.prototype.listAllHelper=function(e,t){return Object(i.__awaiter)(this,void 0,void 0,function(){var r,n,o,a
-return Object(i.__generator)(this,function(s){switch(s.label){case 0:return r={pageToken:t},[4,this.list(r)]
-case 1:return n=s.sent(),(o=e.prefixes).push.apply(o,Object(i.__spread)(n.prefixes)),(a=e.items).push.apply(a,Object(i.__spread)(n.items)),null==n.nextPageToken?[3,3]:[4,this.listAllHelper(e,n.nextPageToken)]
-case 2:s.sent(),s.label=3
+return Object(i.__generator)(this,function(i){switch(i.label){case 0:return r={pageToken:t},[4,this.list(r)]
+case 1:return n=i.sent(),(o=e.prefixes).push.apply(o,n.prefixes),(a=e.items).push.apply(a,n.items),null==n.nextPageToken?[3,3]:[4,this.listAllHelper(e,n.nextPageToken)]
+case 2:i.sent(),i.label=3
 case 3:return[2]}})})},e.prototype.list=function(e){Te("list",[Oe(!0)],arguments)
 var t=this
 return this.authWrapper.getAuthToken().then(function(r){var n=e||{},o=function(e,t,r,n,o){var i={}
@@ -233,23 +233,23 @@ return this.requestMap_.addRequest(r),r},e.prototype.deleteApp=function(){this.d
 this.pendingXhr_=null,this.backoffId_=null,this.resolve_=null,this.reject_=null,this.canceled_=!1,this.appDelete_=!1,this.url_=e,this.method_=t,this.headers_=r,this.body_=n,this.successCodes_=o.slice(),this.additionalRetryCodes_=i.slice(),this.callback_=a,this.errorCallback_=s,this.progressCallback_=c,this.timeout_=u,this.pool_=l,this.promise_=new Promise(function(e,t){p.resolve_=e,p.reject_=t,p.start_()})}return e.prototype.start_=function(){var e=this
 function t(t,r){var n,o=e.resolve_,i=e.reject_,a=r.xhr
 if(r.wasSuccessCode)try{var s=e.callback_(a,a.getResponseText())
-L(s)?o(s):o()}catch(e){i(e)}else null!==a?((n=_()).setServerResponseProp(a.getResponseText()),e.errorCallback_?i(e.errorCallback_(a,n)):i(n)):r.canceled?i(n=e.appDelete_?g():m()):i(n=new h(f.RETRY_LIMIT_EXCEEDED,"Max retry time for operation exceeded, please try again."))}this.canceled_?t(0,new je(!1,null,!0)):this.backoffId_=function(e,t,r){var n=1,o=null,a=!1,s=0
-function u(){return 2===s}var c=!1
-function l(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r]
-c||(c=!0,t.apply(null,e))}function p(t){o=setTimeout(function(){o=null,e(h,u())},t)}function h(e){for(var t,r=[],o=1;o<arguments.length;o++)r[o-1]=arguments[o]
-c||(e?l.call.apply(l,Object(i.__spread)([null,e],r)):u()||a?l.call.apply(l,Object(i.__spread)([null,e],r)):(n<64&&(n*=2),1===s?(s=2,t=0):t=1e3*(n+Math.random()),p(t)))}var f=!1
-function d(e){f||(f=!0,c||(null!==o?(e||(s=2),clearTimeout(o),p(0)):e||(s=1)))}return p(0),setTimeout(function(){a=!0,d(!0)},r),d}(function(t,r){if(r)t(!1,new je(!1,null,!0))
+L(s)?o(s):o()}catch(e){i(e)}else null!==a?((n=_()).setServerResponseProp(a.getResponseText()),e.errorCallback_?i(e.errorCallback_(a,n)):i(n)):r.canceled?i(n=e.appDelete_?g():m()):i(n=new h(f.RETRY_LIMIT_EXCEEDED,"Max retry time for operation exceeded, please try again."))}this.canceled_?t(0,new Be(!1,null,!0)):this.backoffId_=function(e,t,r){var n=1,o=null,i=!1,a=0
+function s(){return 2===a}var u=!1
+function c(){for(var e=[],r=0;r<arguments.length;r++)e[r]=arguments[r]
+u||(u=!0,t.apply(null,e))}function l(t){o=setTimeout(function(){o=null,e(p,s())},t)}function p(e){for(var t,r=[],o=1;o<arguments.length;o++)r[o-1]=arguments[o]
+u||(e?c.call.apply(c,[null,e].concat(r)):s()||i?c.call.apply(c,[null,e].concat(r)):(n<64&&(n*=2),1===a?(a=2,t=0):t=1e3*(n+Math.random()),l(t)))}var h=!1
+function f(e){h||(h=!0,u||(null!==o?(e||(a=2),clearTimeout(o),l(0)):e||(a=1)))}return l(0),setTimeout(function(){i=!0,f(!0)},r),f}(function(t,r){if(r)t(!1,new Be(!1,null,!0))
 else{var n=e.pool_.createXhrIo()
 e.pendingXhr_=n,null!==e.progressCallback_&&n.addUploadProgressListener(o),n.send(e.url_,e.method_,e.body_,e.headers_).then(function(r){null!==e.progressCallback_&&r.removeUploadProgressListener(o),e.pendingXhr_=null
 var n=(r=r).getErrorCode()===O.NO_ERROR,i=r.getStatus()
 if(n&&!e.isRetryStatusCode_(i)){var a=-1!==e.successCodes_.indexOf(i)
-t(!0,new je(a,r))}else{var s=r.getErrorCode()===O.ABORT
-t(!1,new je(!1,null,s))}})}function o(t){var r=t.loaded,n=t.lengthComputable?t.total:-1
+t(!0,new Be(a,r))}else{var s=r.getErrorCode()===O.ABORT
+t(!1,new Be(!1,null,s))}})}function o(t){var r=t.loaded,n=t.lengthComputable?t.total:-1
 null!==e.progressCallback_&&e.progressCallback_(r,n)}},t,this.timeout_)},e.prototype.getPromise=function(){return this.promise_},e.prototype.cancel=function(e){this.canceled_=!0,this.appDelete_=e||!1,null!==this.backoffId_&&(0,this.backoffId_)(!1),null!==this.pendingXhr_&&this.pendingXhr_.abort()},e.prototype.isRetryStatusCode_=function(e){var t=e>=500&&e<600,r=-1!==[408,429].indexOf(e),n=-1!==this.additionalRetryCodes_.indexOf(e)
-return t||r||n},e}(),je=function(e,t,r){this.wasSuccessCode=e,this.xhr=t,this.canceled=!!r}
-function Be(e,t,r){var n=$(e.urlParams),i=e.url+n,a=Object.assign({},e.headers)
+return t||r||n},e}(),Be=function(e,t,r){this.wasSuccessCode=e,this.xhr=t,this.canceled=!!r}
+function Ge(e,t,r){var n=$(e.urlParams),i=e.url+n,a=Object.assign({},e.headers)
 return function(e,t){null!==t&&t.length>0&&(e.Authorization="Firebase "+t)}(a,t),function(e){var t=void 0!==o.a?o.a.SDK_VERSION:"AppManager"
-e["X-Firebase-Storage-Version"]="webjs/"+t}(a),new We(i,e.method,a,e.body,e.successCodes,e.additionalRetryCodes,e.handler,e.errorHandler,e.timeout,e.progressCallback,r)}var Ge,qe,Fe=function(){function e(e,t,r){if(this.bucket_=null,this.authWrapper_=new Me(e,function(e,t){return new Ie(e,t)},Be,this,t),this.app_=e,null!=r)this.bucket_=K.makeFromBucketSpec(r)
+e["X-Firebase-Storage-Version"]="webjs/"+t}(a),new We(i,e.method,a,e.body,e.successCodes,e.additionalRetryCodes,e.handler,e.errorHandler,e.timeout,e.progressCallback,r)}var je,qe,Fe=function(){function e(e,t,r){if(this.bucket_=null,this.authWrapper_=new Me(e,function(e,t){return new Ie(e,t)},Ge,this,t),this.app_=e,null!=r)this.bucket_=K.makeFromBucketSpec(r)
 else{var n=this.authWrapper_.bucket()
 null!=n&&(this.bucket_=new K(n,""))}this.internals_=new He(this)}return e.prototype.ref=function(e){if(Te("ref",[Ae(function(e){if("string"!=typeof e)throw"Path is not a string."
 if(/^[A-Za-z]+:\/\//.test(e))throw"Expected child path but got a URL, use refFromURL instead."},!0)],arguments),null==this.bucket_)throw new Error("No Storage Bucket defined in Firebase Options.")
@@ -257,4 +257,4 @@ var t=new Ie(this.authWrapper_,this.bucket_)
 return null!=e?t.child(e):t},e.prototype.refFromURL=function(e){return Te("refFromURL",[Ae(function(e){if("string"!=typeof e)throw"Path is not a string."
 if(!/^[A-Za-z]+:\/\//.test(e))throw"Expected full URL but got a child path, use ref instead."
 try{K.makeFromUrl(e)}catch(e){throw"Expected valid full URL but got an invalid one."}},!1)],arguments),new Ie(this.authWrapper_,e)},Object.defineProperty(e.prototype,"maxUploadRetryTime",{get:function(){return this.authWrapper_.maxUploadRetryTime()},enumerable:!0,configurable:!0}),e.prototype.setMaxUploadRetryTime=function(e){Te("setMaxUploadRetryTime",[ke()],arguments),this.authWrapper_.setMaxUploadRetryTime(e)},e.prototype.setMaxOperationRetryTime=function(e){Te("setMaxOperationRetryTime",[ke()],arguments),this.authWrapper_.setMaxOperationRetryTime(e)},Object.defineProperty(e.prototype,"app",{get:function(){return this.app_},enumerable:!0,configurable:!0}),Object.defineProperty(e.prototype,"INTERNAL",{get:function(){return this.internals_},enumerable:!0,configurable:!0}),e}(),He=function(){function e(e){this.service_=e}return e.prototype.delete=function(){return this.service_.authWrapper_.deleteApp(),Promise.resolve()},e}()
-Ge=o.a,qe={TaskState:x,TaskEvent:S,StringFormat:w,Storage:Fe,Reference:Ie},Ge.INTERNAL.registerService("storage",function(e,t,r){return new Fe(e,new z,r)},qe,void 0,!0)}}])
+je=o.a,qe={TaskState:x,TaskEvent:S,StringFormat:w,Storage:Fe,Reference:Ie},je.INTERNAL.registerService("storage",function(e,t,r){return new Fe(e,new z,r)},qe,void 0,!0)}}])
