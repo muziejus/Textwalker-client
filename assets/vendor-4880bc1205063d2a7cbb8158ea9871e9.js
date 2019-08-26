@@ -4752,64 +4752,70 @@ for(;h[d-1]>f;)h.pop(),--d
 var p,m=new Array(d+1)
 for(o=0;o<=d;++o)(p=m[o]=[]).x0=o>0?h[o-1]:c,p.x1=o<d?h[o]:f
 for(o=0;o<s;++o)c<=(a=u[o])&&a<=f&&m[i(h,a,0,d)].push(r[o])
-return m}return r.value=function(t){return arguments.length?(e="function"==typeof t?t:b(t),r):e},r.domain=function(e){return arguments.length?(t="function"==typeof e?e:b([e[0],e[1]]),r):t},r.thresholds=function(e){return arguments.length?(n="function"==typeof e?e:Array.isArray(e)?b(m.call(e)):b(e),r):n},r}function S(e){return null===e?NaN:+e}function M(e,t,n=S){if(r=e.length){if((t=+t)<=0||r<2)return+n(e[0],0,e)
+return m}return r.value=function(t){return arguments.length?(e="function"==typeof t?t:b(t),r):e},r.domain=function(e){return arguments.length?(t="function"==typeof e?e:b([e[0],e[1]]),r):t},r.thresholds=function(e){return arguments.length?(n="function"==typeof e?e:Array.isArray(e)?b(m.call(e)):b(e),r):n},r}function S(e){return null===e?NaN:+e}function*M(e,t){if(void 0===t)for(let n of e)null!=n&&(n=+n)>=n&&(yield n)
+else{let n=-1
+for(let r of e)null!=(r=t(r,++n,e))&&(r=+r)>=r&&(yield r)}}function A(e,n,r){return T(Float64Array.from(M(e,r)).sort(t),n)}function T(e,t,n=S){if(r=e.length){if((t=+t)<=0||r<2)return+n(e[0],0,e)
 if(t>=1)return+n(e[r-1],r-1,e)
 var r,i=(r-1)*t,o=Math.floor(i),a=+n(e[o],o,e)
-return a+(+n(e[o+1],o+1,e)-a)*(i-o)}}function A(e,n,r=0,i=e.length-1,o=t){for(;i>r;){if(i-r>600){const t=i-r+1,a=n-r+1,s=Math.log(t),u=.5*Math.exp(2*s/3),l=.5*Math.sqrt(s*u*(t-u)/t)*(a-t/2<0?-1:1)
-A(e,n,Math.max(r,Math.floor(n-a*u/t+l)),Math.min(i,Math.floor(n+(t-a)*u/t+l)),o)}const t=e[n]
+return a+(+n(e[o+1],o+1,e)-a)*(i-o)}}function P(e,t){let n,r=-1,i=-1
+if(void 0===t)for(const o of e)++i,null!=o&&(n<o||void 0===n&&o>=o)&&(n=o,r=i)
+else for(let o of e)null!=(o=t(o,++i,e))&&(n<o||void 0===n&&o>=o)&&(n=o,r=i)
+return r}function R(e,n,r=0,i=e.length-1,o=t){for(;i>r;){if(i-r>600){const t=i-r+1,a=n-r+1,s=Math.log(t),u=.5*Math.exp(2*s/3),l=.5*Math.sqrt(s*u*(t-u)/t)*(a-t/2<0?-1:1)
+R(e,n,Math.max(r,Math.floor(n-a*u/t+l)),Math.min(i,Math.floor(n+(t-a)*u/t+l)),o)}const t=e[n]
 let a=r,s=i
-for(T(e,r,n),o(e[i],t)>0&&T(e,r,i);a<s;){for(T(e,a,s),++a,--s;o(e[a],t)<0;)++a
-for(;o(e[s],t)>0;)--s}0===o(e[r],t)?T(e,r,s):T(e,++s,i),s<=n&&(r=s+1),n<=s&&(i=s-1)}return e}function T(e,t,n){const r=e[t]
-e[t]=e[n],e[n]=r}function P(e,t){let n
+for(C(e,r,n),o(e[i],t)>0&&C(e,r,i);a<s;){for(C(e,a,s),++a,--s;o(e[a],t)<0;)++a
+for(;o(e[s],t)>0;)--s}0===o(e[r],t)?C(e,r,s):C(e,++s,i),s<=n&&(r=s+1),n<=s&&(i=s-1)}return e}function C(e,t,n){const r=e[t]
+e[t]=e[n],e[n]=r}function j(e,t){let n
 if(void 0===t)for(const r of e)null!=r&&(n>r||void 0===n&&r>=r)&&(n=r)
 else{let r=-1
-for(let i of e)null!=(i=t(i,++r,e))&&(n>i||void 0===n&&i>=i)&&(n=i)}return n}function R(e,n=t){let r,i=-1,o=-1
-if(1===n.length)for(const a of e){++o
-const e=n(a);(i<0?0===t(e,e):t(e,r)<0)&&(r=e,i=o)}else for(const t of e)++o,(i<0?0===n(t,t):n(t,r)<0)&&(r=t,i=o)
-return i}function C(e){if(!(i=e.length))return[]
-for(var t=-1,n=P(e,j),r=new Array(n);++t<n;)for(var i,o=-1,a=r[t]=new Array(i);++o<i;)a[o]=e[o][t]
-return r}function j(e){return e.length}e.bisect=i,e.bisectRight=i,e.bisectLeft=o,e.ascending=t,e.bisector=n,e.count=function(e,t){let n=0
-if(void 0===t)for(const r of e)null!=r&&r>=r&&++n
+for(let i of e)null!=(i=t(i,++r,e))&&(n>i||void 0===n&&i>=i)&&(n=i)}return n}function D(e,t){let n,r=-1,i=-1
+if(void 0===t)for(const o of e)++i,null!=o&&(n>o||void 0===n&&o>=o)&&(n=o,r=i)
+else for(let o of e)null!=(o=t(o,++i,e))&&(n>o||void 0===n&&o>=o)&&(n=o,r=i)
+return r}function N(e,n=t){if(1===n.length)return D(e,n)
+let r,i=-1,o=-1
+for(const t of e)++o,(i<0?0===n(t,t):n(t,r)<0)&&(r=t,i=o)
+return i}function L(e){if(!(i=e.length))return[]
+for(var t=-1,n=j(e,I),r=new Array(n);++t<n;)for(var i,o=-1,a=r[t]=new Array(i);++o<i;)a[o]=e[o][t]
+return r}function I(e){return e.length}e.ascending=t,e.bin=O,e.bisect=i,e.bisectLeft=o,e.bisectRight=i,e.bisector=n,e.count=function(e,t){let n=0
+if(void 0===t)for(let r of e)null!=r&&(r=+r)>=r&&++n
 else{let r=-1
-for(let i of e)null!=(i=t(i,++r,e))&&i>=i&&++n}return n},e.cross=function(...e){const t="function"==typeof e[e.length-1]&&function(e){return t=>e(...t)}(e.pop()),n=(e=e.map(u)).map(a),r=e.length-1,i=new Array(r+1).fill(0),o=[]
+for(let i of e)null!=(i=t(i,++r,e))&&(i=+i)>=i&&++n}return n},e.cross=function(...e){const t="function"==typeof e[e.length-1]&&function(e){return t=>e(...t)}(e.pop()),n=(e=e.map(u)).map(a),r=e.length-1,i=new Array(r+1).fill(0),o=[]
 if(r<0||n.some(s))return o
 for(;;){o.push(i.map((t,n)=>e[n][t]))
 let a=r
 for(;++i[a]===n[a];){if(0===a)return t?o.map(t):o
-i[a--]=0}}},e.descending=function(e,t){return t<e?-1:t>e?1:t>=e?0:NaN},e.deviation=c,e.extent=f,e.group=function(e,...t){return d(e,h,h,t)},e.groups=function(e,...t){return d(e,Array.from,h,t)},e.rollup=function(e,t,...n){return d(e,h,t,n)},e.rollups=function(e,t,...n){return d(e,Array.from,t,n)},e.bin=O,e.histogram=O,e.thresholdFreedmanDiaconis=function(e,n,r){return e=v.call(e,S).sort(t),Math.ceil((r-n)/(2*(M(e,.75)-M(e,.25))*Math.pow(e.length,-1/3)))},e.thresholdScott=function(e,t,n){return Math.ceil((n-t)/(3.5*c(e)*Math.pow(e.length,-1/3)))},e.thresholdSturges=k,e.max=function(e,t){let n
-if(void 0===t)for(const r of e)null!=r&&(n<r||void 0===n&&r>=r)&&(n=r)
-else{let r=-1
-for(let i of e)null!=(i=t(i,++r,e))&&(n<i||void 0===n&&i>=i)&&(n=i)}return n},e.maxIndex=function(e,t){let n,r=-1,i=-1
-if(void 0===t)for(const o of e)++i,null!=o&&(n<o||void 0===n&&o>=o)&&(n=o,r=i)
-else for(let o of e)null!=(o=t(o,++i,e))&&(n<o||void 0===n&&o>=o)&&(n=o,r=i)
-return r},e.mean=function(e,t){let n=0,r=0
-if(void 0===t)for(let i of e)null!=i&&(i=+i)>=i&&(++n,r+=i)
-else{let i=-1
-for(let o of e)null!=(o=t(o,++i,e))&&(o=+o)>=o&&(++n,r+=o)}if(n)return r/n},e.median=function(e,t){if(!(e=Float64Array.from(function*(e,t){if(void 0===t)for(let n of e)null!=n&&(n=+n)>=n&&(yield n)
-else{let n=-1
-for(let r of e)null!=(r=t(r,++n,e))&&(r=+r)>=r&&(yield r)}}(e,t))).length)return
-const n=e.length,r=n>>1
-return A(e,r-1,0),0==(1&n)&&A(e,r,r),M(e,.5)},e.merge=function(e){return Array.from(function*(e){for(const t of e)yield*t}(e))},e.min=P,e.minIndex=function(e,t){let n,r=-1,i=-1
-if(void 0===t)for(const o of e)++i,null!=o&&(n>o||void 0===n&&o>=o)&&(n=o,r=i)
-else for(let o of e)null!=(o=t(o,++i,e))&&(n>o||void 0===n&&o>=o)&&(n=o,r=i)
-return r},e.pairs=function(e,t=function(e,t){return[e,t]}){const n=[]
-let r,i=!1
-for(const o of e)i&&n.push(t(r,o)),r=o,i=!0
-return n},e.permute=function(e,t){return Array.from(t,t=>e[t])},e.quantile=M,e.quickselect=A
-e.range=y,e.least=function(e,n=t){let r,i=!1
+i[a--]=0}}},e.descending=function(e,t){return t<e?-1:t>e?1:t>=e?0:NaN},e.deviation=c,e.extent=f,e.greatest=function(e,n=t){let r,i=!1
+if(1===n.length){let o
+for(const a of e){const e=n(a);(i?t(e,o)>0:0===t(e,e))&&(r=a,o=e,i=!0)}}else for(const t of e)(i?n(t,r)>0:0===n(t,t))&&(r=t,i=!0)
+return r},e.greatestIndex=function(e,n=t){if(1===n.length)return P(e,n)
+let r,i=-1,o=-1
+for(const t of e)++o,(i<0?0===n(t,t):n(t,r)>0)&&(r=t,i=o)
+return i},e.group=function(e,...t){return d(e,h,h,t)},e.groups=function(e,...t){return d(e,Array.from,h,t)},e.histogram=O,e.least=function(e,n=t){let r,i=!1
 if(1===n.length){let o
 for(const a of e){const e=n(a);(i?t(e,o)<0:0===t(e,e))&&(r=a,o=e,i=!0)}}else for(const t of e)(i?n(t,r)<0:0===n(t,t))&&(r=t,i=!0)
-return r},e.leastIndex=R,e.scan=function(e,t){const n=R(e,t)
+return r},e.leastIndex=N,e.max=function(e,t){let n
+if(void 0===t)for(const r of e)null!=r&&(n<r||void 0===n&&r>=r)&&(n=r)
+else{let r=-1
+for(let i of e)null!=(i=t(i,++r,e))&&(n<i||void 0===n&&i>=i)&&(n=i)}return n},e.maxIndex=P,e.mean=function(e,t){let n=0,r=0
+if(void 0===t)for(let i of e)null!=i&&(i=+i)>=i&&(++n,r+=i)
+else{let i=-1
+for(let o of e)null!=(o=t(o,++i,e))&&(o=+o)>=o&&(++n,r+=o)}if(n)return r/n},e.median=function(e,t){if(!(e=Float64Array.from(M(e,t))).length)return
+const n=e.length,r=n>>1
+return R(e,r-1,0),0==(1&n)&&R(e,r,r),A(e,.5)},e.merge=function(e){return Array.from(function*(e){for(const t of e)yield*t}(e))},e.min=j,e.minIndex=D,e.pairs=function(e,t=function(e,t){return[e,t]}){const n=[]
+let r,i=!1
+for(const o of e)i&&n.push(t(r,o)),r=o,i=!0
+return n},e.permute=function(e,t){return Array.from(t,t=>e[t])},e.quantile=A,e.quantileSorted=T,e.quickselect=R
+e.range=y,e.rollup=function(e,t,...n){return d(e,h,t,n)},e.rollups=function(e,t,...n){return d(e,Array.from,t,n)},e.scan=function(e,t){const n=N(e,t)
 return n<0?void 0:n},e.shuffle=function(e,t=0,n=e.length){for(var r,i,o=n-(t=+t);o;)i=Math.random()*o--|0,r=e[o+t],e[o+t]=e[i+t],e[i+t]=r
 return e},e.sum=function(e,t){let n=0
 if(void 0===t)for(let r of e)(r=+r)&&(n+=r)
 else{let r=-1
-for(let i of e)(i=+t(i,++r,e))&&(n+=i)}return n},e.ticks=function(e,t,n){var r,i,o,a,s=-1
+for(let i of e)(i=+t(i,++r,e))&&(n+=i)}return n},e.thresholdFreedmanDiaconis=function(e,n,r){return e=v.call(e,S).sort(t),Math.ceil((r-n)/(2*(A(e,.75)-A(e,.25))*Math.pow(e.length,-1/3)))},e.thresholdScott=function(e,t,n){return Math.ceil((n-t)/(3.5*c(e)*Math.pow(e.length,-1/3)))},e.thresholdSturges=k,e.tickIncrement=E,e.tickStep=x,e.ticks=function(e,t,n){var r,i,o,a,s=-1
 if(n=+n,(e=+e)==(t=+t)&&n>0)return[e]
 if((r=t<e)&&(i=e,e=t,t=i),0===(a=E(e,t,n))||!isFinite(a))return[]
 if(a>0)for(e=Math.ceil(e/a),t=Math.floor(t/a),o=new Array(i=Math.ceil(t-e+1));++s<i;)o[s]=(e+s)*a
 else for(e=Math.floor(e*a),t=Math.ceil(t*a),o=new Array(i=Math.ceil(e-t+1));++s<i;)o[s]=(e-s)/a
-return r&&o.reverse(),o},e.tickIncrement=E,e.tickStep=x,e.transpose=C,e.variance=l,e.zip=function(){return C(arguments)},Object.defineProperty(e,"__esModule",{value:!0})},"object"==typeof exports&&"undefined"!=typeof module?n(exports):"function"==typeof e&&e.amd?e(["exports"],n):n(t.d3=t.d3||{})}(function(){function e(){var e=Array.prototype.slice.call(arguments)
+return r&&o.reverse(),o},e.transpose=L,e.variance=l,e.zip=function(){return L(arguments)},Object.defineProperty(e,"__esModule",{value:!0})},"object"==typeof exports&&"undefined"!=typeof module?n(exports):"function"==typeof e&&e.amd?e(["exports"],n):n((t=t||self).d3=t.d3||{})}(function(){function e(){var e=Array.prototype.slice.call(arguments)
 return e.unshift("d3-array"),define.apply(null,e)}return e.amd=!0,e}()),function(e){var t,n
 t=this,n=function(e){"use strict"
 var t=Array.prototype.slice
